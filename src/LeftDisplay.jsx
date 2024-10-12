@@ -1,8 +1,11 @@
-function LeftDisplay() {
+import EditInfo from "./EditInfo.jsx";
+
+function LeftDisplay({ name, setName }) {
   return (
     <>
       <div className="left-box">
-        <h1>Left Box</h1>
+        <p>Left Box</p>
+        <EditInfo name={name} setName={setName} />
       </div>
     </>
   );
