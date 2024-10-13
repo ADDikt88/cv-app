@@ -3,10 +3,14 @@ import DisplayInfo from "./DisplayInfo.jsx";
 import { useState } from "react";
 
 import "./CVApp.css";
-import "./Display.css";
 
 function CVApp() {
-  const [user, setUser] = useState({ name: "", email: "", phone: "" });
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    description: "",
+  });
 
   function handleNameChange(e) {
     const updateName = { ...user, name: e.target.value };
@@ -23,6 +27,11 @@ function CVApp() {
     setUser(updatePhone);
   }
 
+  function handleDescChange(e) {
+    const updateDesc = { ...user, description: e.target.value };
+    setUser(updateDesc);
+  }
+
   return (
     <>
       <div className="left-box">
@@ -32,6 +41,7 @@ function CVApp() {
           handleNameChange={handleNameChange}
           handleEmailChange={handleEmailChange}
           handlePhoneChange={handlePhoneChange}
+          handleDescChange={handleDescChange}
         />
       </div>
       <div className="right-box">

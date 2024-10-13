@@ -1,8 +1,11 @@
+import "./Edit.css";
+
 function EditInfo({
   user,
   handleNameChange,
   handleEmailChange,
   handlePhoneChange,
+  handleDescChange,
 }) {
   return (
     <>
@@ -34,6 +37,19 @@ function EditInfo({
             onChange={handlePhoneChange}
           />
         </fieldset>
+        <div>
+          <label>
+            {"Summary "}
+            <textArea
+              value={user.description}
+              title="Describe yourself in a few sentences"
+              placeholder="An experienced web-developer with 5 years of experience in..."
+              rows="3"
+              cols="33"
+              onChange={handleDescChange}
+            />
+          </label>
+        </div>
       </div>
     </>
   );
