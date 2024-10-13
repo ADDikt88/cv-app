@@ -1,9 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(500px, 50%) 850px;
+  height: 1100px;
+  gap: 50px;
 }
 
 .logo {
@@ -12,11 +18,18 @@
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.left-box,
+.right-box {
+  border: 1px solid black;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.left-box {
+  width: 100%;
+}
+
+.right-box {
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes logo-spin {

@@ -3,6 +3,7 @@ import DisplayInfo from "./DisplayInfo.jsx";
 import { useState } from "react";
 
 import "./CVApp.css";
+import "./Display.css";
 
 function CVApp() {
   const [user, setUser] = useState({ name: "", email: "", phone: "" });
