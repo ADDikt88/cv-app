@@ -5,21 +5,37 @@ import { useState } from "react";
 import "./CVApp.css";
 
 function CVApp() {
-  const [name, setName] = useState("");
+  const [user, setUser] = useState({ name: "", email: "", phone: "" });
 
-  function handleChange(e) {
-    setName(e.target.value);
+  function handleNameChange(e) {
+    const updateName = { ...user, name: e.target.value };
+    setUser(updateName);
+  }
+
+  function handleEmailChange(e) {
+    const updateEmail = { ...user, email: e.target.value };
+    setUser(updateEmail);
+  }
+
+  function handlePhoneChange(e) {
+    const updatePhone = { ...user, phone: e.target.value };
+    setUser(updatePhone);
   }
 
   return (
     <>
       <div className="left-box">
         <p>Left Box</p>
-        <EditInfo name={name} handleChange={handleChange} />
+        <EditInfo
+          user={user.name}
+          handleNameChange={handleNameChange}
+          handleEmailChange={handleEmailChange}
+          handlePhoneChange={handlePhoneChange}
+        />
       </div>
       <div className="right-box">
         <p>Right Box</p>
-        <DisplayInfo name={name} />
+        <DisplayInfo user={user} />
       </div>
     </>
   );

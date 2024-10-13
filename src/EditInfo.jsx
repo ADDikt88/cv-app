@@ -1,19 +1,58 @@
-function EditInfo({ name, handleChange }) {
+function EditInfo({
+  user,
+  handleNameChange,
+  handleEmailChange,
+  handlePhoneChange,
+}) {
   return (
     <>
       <div className="summary-container">
         <h2>Summary</h2>
-        <Input label="Name" value={name} onChange={handleChange} />
+        <fieldset>
+          <Input
+            label="Name"
+            value={user.name}
+            type="text"
+            title="Please enter your first name"
+            minLength="2"
+            onChange={handleNameChange}
+          />
+          <Input
+            label="Email"
+            value={user.email}
+            type="email"
+            title="Please enter your email address"
+            minLength="3"
+            onChange={handleEmailChange}
+          />
+          <Input
+            label="Phone"
+            value={user.phone}
+            type="tel"
+            title="Please enter your phone number"
+            minLength="3"
+            onChange={handlePhoneChange}
+          />
+        </fieldset>
       </div>
     </>
   );
 }
 
-function Input({ label, value, onChange }) {
+function Input({ label, value, type, title, minLength, onChange }) {
   return (
-    <label>
-      {label} <input value={value} onChange={onChange} />
-    </label>
+    <div>
+      <label>
+        {label}{" "}
+        <input
+          value={value}
+          type={type}
+          title={title}
+          minLength={minLength}
+          onChange={onChange}
+        />
+      </label>
+    </div>
   );
 }
 

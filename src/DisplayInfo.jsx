@@ -1,7 +1,9 @@
-function DisplayInfo({ name }) {
+function DisplayInfo({ user }) {
   return (
     <>
-      <h2>{name}</h2>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+      <p>{user.phone}</p>
     </>
   );
 }
