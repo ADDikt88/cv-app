@@ -7,3 +7,14 @@
 .display-info > * {
   margin: 0;
 }
+
+.display-education {
+  text-align: left;
+}
+.display-education > ul > li {
+  list-style: none;
+  text-align: left;
+}
+.display-education > ul > li > * {
+  margin: 0;
+}

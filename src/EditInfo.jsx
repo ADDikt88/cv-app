@@ -40,7 +40,7 @@ function EditInfo({
         <div>
           <label>
             {"Summary "}
-            <textArea
+            <textarea
               value={user.description}
               title="Describe yourself in a few sentences"
               placeholder="An experienced web-developer with 5 years of experience in..."
