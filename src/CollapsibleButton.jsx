@@ -17,7 +17,7 @@ function CollapsibleButton({ buttonLabel, children }) {
         ref={contentRef}
         style={{
           maxHeight: isOpen
-            ? `${contentRef.current.scrollHeight + 40}px`
+            ? `${contentRef.current.scrollHeight + 50}px`
             : "0px",
           overflow: "hidden",
           transition: "max-height 0.3s ease",

@@ -44,7 +44,7 @@ function EditEducation({ handleSubmit, educationList }) {
               </div>
             </fieldset>
             <button className="edu-submit" type="submit">
-              Submit
+              Add Education
             </button>
           </form>
           <EducationCard educationList={educationList} />

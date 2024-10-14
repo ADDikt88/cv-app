@@ -18,3 +18,24 @@
 .display-education > ul > li > * {
   margin: 0;
 }
+
+.display-skills {
+  text-align: left;
+}
+
+.display-skills > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.display-skills > ul > li {
+  list-style: none;
+  text-align: left;
+  border: 1px solid black;
+  padding: 0 20px;
+  border-radius: 8px;
+}
+.display-skills > ul > li > * {
+  margin: 0;
+}
