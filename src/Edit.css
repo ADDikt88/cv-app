@@ -17,3 +17,21 @@
 .education-container > * {
   margin: 0;
 }
+
+.education-card {
+  text-align: left;
+}
+.education-card > ul > li {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.education-card > ul > li > * {
+  margin: 0;
+}
+
+.edu-submit {
+  border: 1px solid black;
+}

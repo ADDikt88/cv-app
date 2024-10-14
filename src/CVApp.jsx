@@ -21,9 +21,10 @@ function CVApp() {
     e.preventDefault();
     const name = e.target.elements.name.value;
     const degree = e.target.elements.degree.value;
-    const year = e.target.elements.year.value;
+    const entryYear = e.target.elements.entryYear.value;
+    const gradYear = e.target.elements.gradYear.value;
 
-    setEducationList([...educationList, { name, degree, year }]);
+    setEducationList([...educationList, { name, degree, entryYear, gradYear }]);
 
     e.target.reset();
   }
@@ -59,7 +60,10 @@ function CVApp() {
           handlePhoneChange={handlePhoneChange}
           handleDescChange={handleDescChange}
         />
-        <EditEducation handleSubmit={handleEducationSubmit} />
+        <EditEducation
+          handleSubmit={handleEducationSubmit}
+          educationList={educationList}
+        />
       </div>
       <div className="right-box">
         <p>Right Box</p>

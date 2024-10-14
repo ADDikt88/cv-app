@@ -9,7 +9,9 @@ function DisplayEducation({ educationList }) {
           <li key={index}>
             <h2>{education.name}</h2>
             <p>{education.degree}</p>
-            <p>{education.year}</p>
+            <p>
+              {education.entryYear} to {education.gradYear}
+            </p>
           </li>
         ))}
       </ul>
