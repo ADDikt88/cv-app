@@ -1,3 +1,8 @@
+.collapsible {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .summary-container {
   display: flex;
   flex-direction: column;
