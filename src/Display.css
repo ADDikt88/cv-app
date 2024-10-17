@@ -8,25 +8,71 @@
   margin: 0;
 }
 
+/*** EDUCATION ***/
 .display-education {
   text-align: left;
+}
+.display-education > * {
+  margin: 0;
+}
+.display-education > ul {
+  padding: 10px 0 10px 10px;
 }
 .display-education > ul > li {
   list-style: none;
   text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .display-education > ul > li > * {
   margin: 0;
 }
 
+/*** EXPERIENCE ***/
+.display-experience {
+  text-align: left;
+}
+.display-experience > * {
+  margin: 0;
+}
+.display-experience > ul {
+  padding: 10px 0 10px 10px;
+}
+.display-experience > ul > li {
+  list-style: none;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.display-experience > ul > li > ul {
+  grid-column: 1 / 3;
+}
+.display-experience > ul > li > * {
+  margin: 0;
+}
+
+.display-experience > ul > li > ul > li > * {
+  margin: 0;
+}
+
+/*** SKILLS ***/
 .display-skills {
   text-align: left;
+  margin: 10px 0;
+}
+
+.display-skills > * {
+  margin: 5px 0;
 }
 
 .display-skills > ul {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  padding-left: 10px;
 }
 
 .display-skills > ul > li {

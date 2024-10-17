@@ -13,6 +13,16 @@
   margin: 0;
 }
 
+.summary-content > div > label {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.summary-content > div > label > input {
+  width: 100%;
+}
+/*** EDUCATION ***/
 .education-container {
   display: flex;
   flex-direction: column;
@@ -40,6 +50,37 @@
 .edu-submit {
   border: 1px solid black;
 }
+
+/*** EXPERIENCE ***/
+.experience-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.experience-container > * {
+  margin: 0;
+}
+
+.experience-card {
+  text-align: left;
+}
+.experience-card > ul > li {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.experience-card > ul > li > * {
+  margin: 0;
+}
+
+.exp-submit {
+  border: 1px solid black;
+}
+
+/*** SKILLS ***/
 
 .skills-container {
   display: flex;

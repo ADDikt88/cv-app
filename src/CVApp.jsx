@@ -4,6 +4,8 @@ import EditEducation from "./EditEducation.jsx";
 import DisplayEducation from "./DisplayEducation.jsx";
 import EditSkills from "./EditSkills.jsx";
 import DisplaySkills from "./DisplaySkills.jsx";
+import EditExperience from "./EditExperience.jsx";
+import DisplayExperience from "./DisplayExperience.jsx";
 import { useState } from "react";
 
 import "./CVApp.css";
@@ -24,7 +26,30 @@ function CVApp() {
       gradYear: 2025,
     },
   ]);
+
+  const [experienceList, setExperienceList] = useState([
+    {
+      jobTitle: "Software Developer",
+      company: "Pear Inc.",
+      startMonth: 1,
+      startYear: 2015,
+      endMonth: 1,
+      endYear: 2025,
+      current: false,
+      responsibility: [
+        "Developed entire user interface",
+        "Created the first jPhone",
+        "Added a scroll wheel to the jMouse",
+      ],
+    },
+  ]);
+
   const [skillsList, setSkillsList] = useState(["React", "HTML", "CSS"]);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const [inputMonth, setInputMonth] = useState("");
+  const [inputYear, setInputYear] = useState("");
 
   function handleEducationSubmit(e) {
     console.log("education added");
@@ -36,6 +61,40 @@ function CVApp() {
 
     setEducationList([...educationList, { name, degree, entryYear, gradYear }]);
 
+    e.target.reset();
+  }
+
+  function handleExperienceSubmit(e) {
+    console.log("experience added");
+    e.preventDefault();
+    const jobTitle = e.target.elements.jobTitle.value;
+    const company = e.target.elements.company.value;
+    const startMonth = e.target.elements.startMonth.value;
+    const startYear = e.target.elements.startYear.value;
+    const endMonth = e.target.elements.endMonth.value;
+    const endYear = e.target.elements.endYear.value;
+    const current = e.target.elements.current.checked;
+
+    const exp1 = e.target.elements.experience1.value;
+    const exp2 = e.target.elements.experience2.value;
+    const exp3 = e.target.elements.experience3.value;
+
+    const responsibility = [exp1, exp2, exp3];
+
+    setExperienceList([
+      ...experienceList,
+      {
+        jobTitle,
+        company,
+        startMonth,
+        startYear,
+        endMonth,
+        endYear,
+        current,
+        responsibility,
+      },
+    ]);
+    setIsChecked(false);
     e.target.reset();
   }
 
@@ -69,6 +128,22 @@ function CVApp() {
     setUser(updateDesc);
   }
 
+  function handleCheckbox() {
+    if (!isChecked) {
+      setInputMonth("");
+      setInputYear("");
+    }
+    setIsChecked(!isChecked);
+  }
+
+  function handleInputMonth(e) {
+    setInputMonth(e.target.value);
+  }
+
+  function handleInputYear(e) {
+    setInputYear(e.target.value);
+  }
+
   return (
     <>
       <div className="left-box">
@@ -81,6 +156,16 @@ function CVApp() {
           handleDescChange={handleDescChange}
         />
         <EditSkills handleSubmit={handleNewSkill} skillsList={skillsList} />
+        <EditExperience
+          handleSubmit={handleExperienceSubmit}
+          experienceList={experienceList}
+          handleCheckbox={handleCheckbox}
+          isChecked={isChecked}
+          inputMonth={inputMonth}
+          inputYear={inputYear}
+          handleInputMonth={handleInputMonth}
+          handleInputYear={handleInputYear}
+        />
         <EditEducation
           handleSubmit={handleEducationSubmit}
           educationList={educationList}
@@ -90,6 +175,7 @@ function CVApp() {
         <p>See your CV template update below</p>
         <DisplayInfo user={user} />
         <DisplaySkills skillsList={skillsList} />
+        <DisplayExperience experienceList={experienceList} />
         <DisplayEducation educationList={educationList} />
       </div>
     </>
