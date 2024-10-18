@@ -7,7 +7,7 @@ function EditEducation({ handleSubmit, educationList }) {
       <div className="education-container">
         <CollapsibleButton buttonLabel="Education">
           <form onSubmit={handleSubmit}>
-            <fieldset>
+            <fieldset className="education-content">
               <Input
                 label="School"
                 name="name"
@@ -58,7 +58,7 @@ function Input({ label, name, type, title, minLength, min, max, step }) {
   return (
     <div>
       <label>
-        {label}{" "}
+        <span>{label} </span>
         <input
           type={type}
           name={name}

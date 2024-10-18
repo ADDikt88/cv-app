@@ -16,7 +16,7 @@ function DisplayExperience({ experienceList }) {
         {sortedExperience.map((experience, index) => (
           <li key={index}>
             <h3>{experience.jobTitle}</h3>
-            <p>
+            <p className="experience-dates">
               {experience.startMonth}
               {"/"}
               {experience.startYear}

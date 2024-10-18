@@ -17,10 +17,11 @@
   display: flex;
   gap: 10px;
   padding: 4px 0;
+  justify-content: flex-end;
 }
 
-.summary-content > div > label > input {
-  width: 100%;
+.summary-content > div > label > * {
+  width: 80%;
 }
 /*** EDUCATION ***/
 .education-container {
@@ -33,6 +34,36 @@
   margin: 0;
 }
 
+.education-content > div > label {
+  display: flex;
+  gap: 5px;
+  padding: 4px 0;
+  justify-content: flex-end;
+}
+
+.education-content > div > label > * {
+  width: 80%;
+}
+
+.education-content > div > label > span {
+  width: 60px;
+}
+
+.education-years {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+
+.education-years > div > label > * {
+  width: 100px;
+}
+
+.education-years > div > label > input {
+  padding: 2px;
+}
+
 .education-card {
   text-align: left;
 }
@@ -40,7 +71,7 @@
   list-style: none;
   text-align: left;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .education-card > ul > li > * {
@@ -62,6 +93,47 @@
   margin: 0;
 }
 
+.experience-form > div > label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 4px 0;
+  text-align: right;
+}
+
+.experience-form > div > label > * {
+  width: 75%;
+  justify-self: right;
+}
+
+.experience-form > div > label > span {
+  flex-basis: 100px;
+}
+
+.experience-form > div > label > textarea {
+  resize: none;
+}
+
+.employment-years {
+  display: grid;
+  width: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  padding: 0 9px;
+}
+
+.employment-years > div > label {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  text-align: right;
+}
+
+.employment-years > div > label > * {
+  width: 26%;
+  justify-self: right;
+}
+
 .experience-card {
   text-align: left;
 }
@@ -69,13 +141,16 @@
   list-style: none;
   text-align: left;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .experience-card > ul > li > * {
   margin: 0;
 }
 
+.experience-dates {
+  text-align: right;
+}
 .exp-submit {
   border: 1px solid black;
 }

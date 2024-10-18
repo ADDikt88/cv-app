@@ -95,6 +95,8 @@ function CVApp() {
       },
     ]);
     setIsChecked(false);
+    setInputMonth("");
+    setInputYear("");
     e.target.reset();
   }
 

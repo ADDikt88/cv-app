@@ -16,7 +16,7 @@ function EditExperience({
       <div className="experience-container">
         <CollapsibleButton buttonLabel="Experience">
           <form onSubmit={handleSubmit}>
-            <fieldset>
+            <fieldset className="experience-form">
               <Input
                 label="Job Title"
                 name="jobTitle"
@@ -80,25 +80,25 @@ function EditExperience({
                   value={inputYear}
                   onChange={handleInputYear}
                 />
-                <ExperienceTextArea
-                  id="1"
-                  name="experience1"
-                  placeholder="Add an experience..."
-                  title="Please enter the name of the company you worked at"
-                />
-                <ExperienceTextArea
-                  id="2"
-                  name="experience2"
-                  placeholder="Add an experience..."
-                  title="Please enter the name of the company you worked at"
-                />
-                <ExperienceTextArea
-                  id="3"
-                  name="experience3"
-                  placeholder="Add an experience..."
-                  title="Please enter the name of the company you worked at"
-                />
               </div>
+              <ExperienceTextArea
+                id="1"
+                name="experience1"
+                placeholder="Add an experience..."
+                title="Please enter the name of the company you worked at"
+              />
+              <ExperienceTextArea
+                id="2"
+                name="experience2"
+                placeholder="Add an experience..."
+                title="Please enter the name of the company you worked at"
+              />
+              <ExperienceTextArea
+                id="3"
+                name="experience3"
+                placeholder="Add an experience..."
+                title="Please enter the name of the company you worked at"
+              />
             </fieldset>
             <button className="exp-submit" type="submit">
               Add Experience
@@ -167,7 +167,7 @@ function ExperienceTextArea({ id, title, placeholder, name }) {
   return (
     <div>
       <label>
-        {"Main Responsibility " + id}
+        <span>{`Main Role ${id}`}</span>
         <textarea
           title={title}
           placeholder={placeholder}
