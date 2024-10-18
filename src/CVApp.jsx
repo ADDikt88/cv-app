@@ -11,12 +11,15 @@ import { useState } from "react";
 import "./CVApp.css";
 
 function CVApp() {
+  /******************************* Initializing Content ***********************************/
   const [user, setUser] = useState({
     name: "Kyle Tsang",
     email: "fake@fake.aol",
     phone: "123456789",
     description: "lorem ipsum",
   });
+
+  const [skillsList, setSkillsList] = useState(["React", "HTML", "CSS"]);
 
   const [educationList, setEducationList] = useState([
     {
@@ -44,12 +47,7 @@ function CVApp() {
     },
   ]);
 
-  const [skillsList, setSkillsList] = useState(["React", "HTML", "CSS"]);
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const [inputMonth, setInputMonth] = useState("");
-  const [inputYear, setInputYear] = useState("");
+  /******************************* Education Functions ***********************************/
 
   function handleEducationSubmit(e) {
     console.log("education added");
@@ -63,6 +61,13 @@ function CVApp() {
 
     e.target.reset();
   }
+
+  /******************************* Experience Functions ***********************************/
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const [inputMonth, setInputMonth] = useState("");
+  const [inputYear, setInputYear] = useState("");
 
   function handleExperienceSubmit(e) {
     console.log("experience added");
@@ -100,15 +105,82 @@ function CVApp() {
     e.target.reset();
   }
 
+  function handleCheckbox() {
+    if (!isChecked) {
+      setInputMonth("");
+      setInputYear("");
+    }
+    setIsChecked(!isChecked);
+  }
+
+  function handleInputMonth(e) {
+    setInputMonth(e.target.value);
+  }
+
+  function handleInputYear(e) {
+    setInputYear(e.target.value);
+  }
+
+  /******************************* Skill Functions ***********************************/
+
+  const [editSkillMode, setEditSkillMode] = useState(false);
+  const [editSkillIndex, setEditSkillIndex] = useState(null);
+  const [editSkill, setEditSkill] = useState("");
+
   function handleNewSkill(e) {
-    console.log("skill added");
     e.preventDefault();
     const skill = e.target.elements.skill.value;
 
-    setSkillsList([...skillsList, skill]);
+    if (!editSkillMode) {
+      console.log("skill added " + skill);
+      setSkillsList([...skillsList, skill]);
+    } else {
+      console.log("skill editing " + skill + editSkillIndex);
+      const updatedSkills = [...skillsList];
+      updatedSkills[editSkillIndex] = skill;
+      setSkillsList(updatedSkills);
+      const skillButton = document.querySelector(".skill-submit");
+      skillButton.textContent = "Add SKill";
 
+      const skillItems = document.querySelectorAll(".skills-list > li");
+      skillItems.forEach((skillItem) => (skillItem.style.border = "none"));
+
+      const skillButtons = document.querySelectorAll(
+        ".skills-list > li > button"
+      );
+      skillButtons.forEach((skillBtn) => (skillBtn.disabled = false));
+    }
+
+    setEditSkillMode(false);
     e.target.reset();
   }
+
+  function handleSkillEditClick(index) {
+    console.log(skillsList[index]);
+    const editField = document.querySelector(".skills-input");
+    editField.value = skillsList[index];
+
+    const skillItems = document.querySelectorAll(".skills-list > li");
+    skillItems.forEach((skillItem) => (skillItem.style.border = "none"));
+    skillItems[index].style.border = "1px solid red";
+
+    const skillButton = document.querySelector(".skill-submit");
+    skillButton.textContent = "Edit SKill";
+
+    const skillButtons = document.querySelectorAll(
+      ".skills-list > li > button"
+    );
+    skillButtons.forEach((skillBtn) => (skillBtn.disabled = true));
+
+    setEditSkillIndex(index);
+    setEditSkillMode(true);
+  }
+
+  function handleSkillInputChange(e) {
+    setEditSkill(e.target.value);
+  }
+
+  /******************************* Info Change Functions ***********************************/
 
   function handleNameChange(e) {
     const updateName = { ...user, name: e.target.value };
@@ -130,22 +202,7 @@ function CVApp() {
     setUser(updateDesc);
   }
 
-  function handleCheckbox() {
-    if (!isChecked) {
-      setInputMonth("");
-      setInputYear("");
-    }
-    setIsChecked(!isChecked);
-  }
-
-  function handleInputMonth(e) {
-    setInputMonth(e.target.value);
-  }
-
-  function handleInputYear(e) {
-    setInputYear(e.target.value);
-  }
-
+  /******************************* Return CV App ***********************************/
   return (
     <>
       <div className="left-box">
@@ -157,7 +214,13 @@ function CVApp() {
           handlePhoneChange={handlePhoneChange}
           handleDescChange={handleDescChange}
         />
-        <EditSkills handleSubmit={handleNewSkill} skillsList={skillsList} />
+        <EditSkills
+          handleSubmit={handleNewSkill}
+          skillsList={skillsList}
+          handleSkillInputChange={handleSkillInputChange}
+          editSkill={editSkill}
+          handleSkillEditClick={handleSkillEditClick}
+        />
         <EditExperience
           handleSubmit={handleExperienceSubmit}
           experienceList={experienceList}

@@ -1,7 +1,13 @@
 import "./Edit.css";
 import CollapsibleButton from "./CollapsibleButton";
 
-function EditSkills({ handleSubmit, skillsList }) {
+function EditSkills({
+  handleSubmit,
+  skillsList,
+  handleSkillInputChange,
+  editSkill,
+  handleSkillEditClick,
+}) {
   return (
     <>
       <div className="skills-container">
@@ -13,30 +19,37 @@ function EditSkills({ handleSubmit, skillsList }) {
               type="text"
               title="Please enter a new skill"
               minLength="1"
+              onChange={handleSkillInputChange}
+              value={editSkill}
             />
 
             <button className="skill-submit" type="submit">
               Add Skill
             </button>
           </form>
-          <SkillsCard skillsList={skillsList} />
+          <SkillsCard
+            skillsList={skillsList}
+            handleSkillEditClick={handleSkillEditClick}
+          />
         </CollapsibleButton>
       </div>
     </>
   );
 }
 
-function Input({ label, name, type, title, minLength }) {
+function Input({ label, name, type, title, minLength, onChange, editSkill }) {
   return (
     <div>
       <label>
         {label}{" "}
         <input
+          className="skills-input"
           type={type}
           name={name}
           title={title}
           minLength={minLength}
-          defaultValue=""
+          onChange={onChange}
+          value={editSkill}
           required
         />
       </label>
@@ -44,14 +57,21 @@ function Input({ label, name, type, title, minLength }) {
   );
 }
 
-function SkillsCard({ skillsList }) {
+function SkillsCard({ skillsList, handleSkillEditClick }) {
   return (
     <div className="skills-card">
-      <ul>
+      <ul className="skills-list">
         {skillsList.map((skill, index) => (
           <li key={index}>
             <p>{skill}</p>
-            <button>Edit</button>
+            <button
+              className="edit-skill"
+              onClick={() => {
+                handleSkillEditClick(index);
+              }}
+            >
+              Edit
+            </button>
             <button>Del</button>
           </li>
         ))}
