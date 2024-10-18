@@ -49,17 +49,88 @@ function CVApp() {
 
   /******************************* Education Functions ***********************************/
 
+  const [editEduMode, setEditEduMode] = useState(false);
+  const [editEduIndex, setEditEduIndex] = useState(null);
+  const [editEdu, setEditEdu] = useState({
+    name: "",
+    degree: "",
+    entryYear: null,
+    gradYear: null,
+  });
+
   function handleEducationSubmit(e) {
-    console.log("education added");
     e.preventDefault();
     const name = e.target.elements.name.value;
     const degree = e.target.elements.degree.value;
     const entryYear = e.target.elements.entryYear.value;
     const gradYear = e.target.elements.gradYear.value;
 
-    setEducationList([...educationList, { name, degree, entryYear, gradYear }]);
+    const newEducation = { name, degree, entryYear, gradYear };
 
+    if (!editEduMode) {
+      console.log("education added");
+      setEducationList([...educationList, newEducation]);
+    } else {
+      console.log("skill editing");
+      const updatedEducation = [...educationList];
+      updatedEducation[editEduIndex] = newEducation;
+      setEducationList(updatedEducation);
+
+      const eduButton = document.querySelector(".edu-submit");
+      eduButton.textContent = "Add Education";
+
+      const eduItems = document.querySelectorAll(".edu-list > li");
+      eduItems.forEach((eduItem) => (eduItem.style.border = "none"));
+
+      const eduButtons = document.querySelectorAll(".edu-list > li > button");
+      eduButtons.forEach((eduBtn) => (eduBtn.disabled = false));
+    }
+    setEditEduIndex(null);
+    setEditEduMode(false);
     e.target.reset();
+  }
+
+  function handleEduEditClick(index) {
+    console.log(educationList[index]);
+    //
+    const editSchool = document.querySelector("#editSchool");
+    const editDegree = document.querySelector("#editDegree");
+    const editEntryYear = document.querySelector("#editEduEntryYear");
+    const editGradYear = document.querySelector("#editEduGradYear");
+
+    editSchool.value = educationList[index].name;
+    editDegree.value = educationList[index].degree;
+    editEntryYear.value = educationList[index].entryYear;
+    editGradYear.value = educationList[index].gradYear;
+
+    const eduItems = document.querySelectorAll(".edu-list > li");
+    eduItems.forEach((eduItem) => (eduItem.style.border = "none"));
+    eduItems[index].style.border = "1px solid red";
+
+    const eduButton = document.querySelector(".edu-submit");
+    eduButton.textContent = "Edit Education";
+
+    const eduButtons = document.querySelectorAll(".edu-list > li > button");
+    eduButtons.forEach((eduBtn) => (eduBtn.disabled = true));
+
+    setEditEduIndex(index);
+    setEditEduMode(true);
+  }
+
+  function handleEduDelClick(index) {
+    console.log("edu deleting " + index);
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this education?"
+    );
+
+    if (confirmed) {
+      const updatedEducation = educationList.filter((item, i) => i !== index);
+      setEducationList(updatedEducation);
+    }
+  }
+
+  function handleEduInputChange(e) {
+    setEditEdu(e.target.value);
   }
 
   /******************************* Experience Functions ***********************************/
@@ -247,6 +318,10 @@ function CVApp() {
         <EditEducation
           handleSubmit={handleEducationSubmit}
           educationList={educationList}
+          handleEduInputChange={handleEduInputChange}
+          editEdu={editEdu}
+          handleEduEditClick={handleEduEditClick}
+          handleEduDelClick={handleEduDelClick}
         />
       </div>
       <div className="right-box">

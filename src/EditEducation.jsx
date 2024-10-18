@@ -1,7 +1,14 @@
 import "./Edit.css";
 import CollapsibleButton from "./CollapsibleButton";
 
-function EditEducation({ handleSubmit, educationList }) {
+function EditEducation({
+  handleSubmit,
+  educationList,
+  handleEduInputChange,
+  editEdu,
+  handleEduEditClick,
+  handleEduDelClick,
+}) {
   return (
     <>
       <div className="education-container">
@@ -14,6 +21,9 @@ function EditEducation({ handleSubmit, educationList }) {
                 type="text"
                 title="Please enter your school name"
                 minLength="1"
+                onChange={handleEduInputChange}
+                value={editEdu.degree}
+                id="editSchool"
               />
               <Input
                 label="Degree"
@@ -21,6 +31,9 @@ function EditEducation({ handleSubmit, educationList }) {
                 type="text"
                 title="Please enter the name of your degree"
                 minLength="1"
+                onChange={handleEduInputChange}
+                value={editEdu.degree}
+                id="editDegree"
               />
               <div className="education-years">
                 <Input
@@ -31,6 +44,9 @@ function EditEducation({ handleSubmit, educationList }) {
                   min="1930"
                   max="2030"
                   step="1"
+                  onChange={handleEduInputChange}
+                  value={editEdu.entryYear}
+                  id="editEduEntryYear"
                 />
                 <Input
                   label="Graduation Year"
@@ -40,6 +56,9 @@ function EditEducation({ handleSubmit, educationList }) {
                   min="1930"
                   max="2030"
                   step="1"
+                  onChange={handleEduInputChange}
+                  value={editEdu.gradYear}
+                  id="editEduGradYear"
                 />
               </div>
             </fieldset>
@@ -47,14 +66,30 @@ function EditEducation({ handleSubmit, educationList }) {
               Add Education
             </button>
           </form>
-          <EducationCard educationList={educationList} />
+          <EducationCard
+            educationList={educationList}
+            handleEduEditClick={handleEduEditClick}
+            handleEduDelClick={handleEduDelClick}
+          />
         </CollapsibleButton>
       </div>
     </>
   );
 }
 
-function Input({ label, name, type, title, minLength, min, max, step }) {
+function Input({
+  label,
+  name,
+  type,
+  title,
+  minLength,
+  min,
+  max,
+  step,
+  onChange,
+  editEdu,
+  id,
+}) {
   return (
     <div>
       <label>
@@ -64,10 +99,12 @@ function Input({ label, name, type, title, minLength, min, max, step }) {
           name={name}
           title={title}
           minLength={minLength}
-          defaultValue=""
+          onChange={onChange}
+          value={editEdu}
           min={min}
           max={max}
           step={step}
+          id={id}
           required
         />
       </label>
@@ -75,10 +112,14 @@ function Input({ label, name, type, title, minLength, min, max, step }) {
   );
 }
 
-function EducationCard({ educationList }) {
+function EducationCard({
+  educationList,
+  handleEduEditClick,
+  handleEduDelClick,
+}) {
   return (
     <div className="education-card">
-      <ul>
+      <ul className="edu-list">
         {educationList.map((education, index) => (
           <li key={index}>
             <p>{education.name}</p>
@@ -86,8 +127,22 @@ function EducationCard({ educationList }) {
             <p>
               {education.entryYear} to {education.gradYear}
             </p>
-            <button>Edit</button>
-            <button>Del</button>
+            <button
+              className="edit-edu"
+              onClick={() => {
+                handleEduEditClick(index);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="del-edu"
+              onClick={() => {
+                handleEduDelClick(index);
+              }}
+            >
+              Del
+            </button>
           </li>
         ))}
       </ul>
