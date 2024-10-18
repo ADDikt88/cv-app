@@ -7,6 +7,7 @@ function EditSkills({
   handleSkillInputChange,
   editSkill,
   handleSkillEditClick,
+  handleSkillDelClick,
 }) {
   return (
     <>
@@ -30,6 +31,7 @@ function EditSkills({
           <SkillsCard
             skillsList={skillsList}
             handleSkillEditClick={handleSkillEditClick}
+            handleSkillDelClick={handleSkillDelClick}
           />
         </CollapsibleButton>
       </div>
@@ -57,7 +59,7 @@ function Input({ label, name, type, title, minLength, onChange, editSkill }) {
   );
 }
 
-function SkillsCard({ skillsList, handleSkillEditClick }) {
+function SkillsCard({ skillsList, handleSkillEditClick, handleSkillDelClick }) {
   return (
     <div className="skills-card">
       <ul className="skills-list">
@@ -72,7 +74,14 @@ function SkillsCard({ skillsList, handleSkillEditClick }) {
             >
               Edit
             </button>
-            <button>Del</button>
+            <button
+              className="del-skill"
+              onClick={() => {
+                handleSkillDelClick(index);
+              }}
+            >
+              Del
+            </button>
           </li>
         ))}
       </ul>

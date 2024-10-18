@@ -150,7 +150,7 @@ function CVApp() {
       );
       skillButtons.forEach((skillBtn) => (skillBtn.disabled = false));
     }
-
+    setEditSkillIndex(null);
     setEditSkillMode(false);
     e.target.reset();
   }
@@ -174,6 +174,18 @@ function CVApp() {
 
     setEditSkillIndex(index);
     setEditSkillMode(true);
+  }
+
+  function handleSkillDelClick(index) {
+    console.log("skill deleting " + index);
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this skill?"
+    );
+
+    if (confirmed) {
+      const updatedSkills = skillsList.filter((item, i) => i !== index);
+      setSkillsList(updatedSkills);
+    }
   }
 
   function handleSkillInputChange(e) {
@@ -220,6 +232,7 @@ function CVApp() {
           handleSkillInputChange={handleSkillInputChange}
           editSkill={editSkill}
           handleSkillEditClick={handleSkillEditClick}
+          handleSkillDelClick={handleSkillDelClick}
         />
         <EditExperience
           handleSubmit={handleExperienceSubmit}
