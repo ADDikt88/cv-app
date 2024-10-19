@@ -5,11 +5,10 @@ function EditExperience({
   handleSubmit,
   experienceList,
   handleCheckbox,
-  isChecked,
-  inputMonth,
-  inputYear,
-  handleInputMonth,
-  handleInputYear,
+  editExp,
+  handleExpEditClick,
+  handleExpDelClick,
+  handleExpInputChange,
 }) {
   return (
     <>
@@ -23,6 +22,9 @@ function EditExperience({
                 type="text"
                 title="Please enter your job title"
                 minLength="1"
+                value={editExp.jobTitle}
+                onChange={handleExpInputChange}
+                id="editJobTitle"
               />
               <Input
                 label="Company"
@@ -30,6 +32,9 @@ function EditExperience({
                 type="text"
                 title="Please enter the name of the company you worked at"
                 minLength="1"
+                value={editExp.company}
+                onChange={handleExpInputChange}
+                id="editCompany"
               />
               <div className="employment-years">
                 <Input
@@ -40,6 +45,9 @@ function EditExperience({
                   min="1"
                   max="12"
                   step="1"
+                  value={editExp.startMonth}
+                  onChange={handleExpInputChange}
+                  id="editStartMonth"
                 />
                 <Input
                   label="Start Year"
@@ -49,11 +57,14 @@ function EditExperience({
                   min="1930"
                   max="2025"
                   step="1"
+                  value={editExp.startYear}
+                  onChange={handleExpInputChange}
+                  id="editStartYear"
                 />
                 <Checkbox
                   label="Current?"
                   name="current"
-                  checked={isChecked}
+                  checked={editExp.current}
                   onChange={handleCheckbox}
                 />
                 <Input
@@ -64,9 +75,10 @@ function EditExperience({
                   min="1"
                   max="12"
                   step="1"
-                  disabled={isChecked}
-                  value={inputMonth}
-                  onChange={handleInputMonth}
+                  disabled={editExp.current}
+                  value={editExp.endMonth}
+                  onChange={handleExpInputChange}
+                  id="editEndMonth"
                 />
                 <Input
                   label="End Year"
@@ -76,9 +88,10 @@ function EditExperience({
                   min="1930"
                   max="2025"
                   step="1"
-                  disabled={isChecked}
-                  value={inputYear}
-                  onChange={handleInputYear}
+                  disabled={editExp.current}
+                  value={editExp.endYear}
+                  onChange={handleExpInputChange}
+                  id="editEndYear"
                 />
               </div>
               <ExperienceTextArea
@@ -86,25 +99,35 @@ function EditExperience({
                 name="experience1"
                 placeholder="Add an experience..."
                 title="Please enter the name of the company you worked at"
+                value={editExp.resp1}
+                onChange={handleExpInputChange}
               />
               <ExperienceTextArea
                 id="2"
                 name="experience2"
                 placeholder="Add an experience..."
                 title="Please enter the name of the company you worked at"
+                value={editExp.resp2}
+                onChange={handleExpInputChange}
               />
               <ExperienceTextArea
                 id="3"
                 name="experience3"
                 placeholder="Add an experience..."
                 title="Please enter the name of the company you worked at"
+                value={editExp.resp3}
+                onChange={handleExpInputChange}
               />
             </fieldset>
             <button className="exp-submit" type="submit">
               Add Experience
             </button>
           </form>
-          <ExperienceCard experienceList={experienceList} />
+          <ExperienceCard
+            experienceList={experienceList}
+            handleExpEditClick={handleExpEditClick}
+            handleExpDelClick={handleExpDelClick}
+          />
         </CollapsibleButton>
       </div>
     </>
@@ -121,8 +144,9 @@ function Input({
   max,
   step,
   disabled,
-  value,
+  editExp,
   onChange,
+  id,
 }) {
   return (
     <div>
@@ -138,8 +162,9 @@ function Input({
           max={max}
           step={step}
           disabled={disabled}
-          value={value}
+          value={editExp}
           onChange={onChange}
+          id={id}
           required
         />
       </label>
@@ -157,13 +182,21 @@ function Checkbox({ label, value, name, onChange }) {
           name={name}
           checked={value}
           onChange={onChange}
+          id="checkbox"
         />
       </label>
     </div>
   );
 }
 
-function ExperienceTextArea({ id, title, placeholder, name }) {
+function ExperienceTextArea({
+  id,
+  title,
+  placeholder,
+  name,
+  onChange,
+  editExp,
+}) {
   return (
     <div>
       <label>
@@ -174,22 +207,43 @@ function ExperienceTextArea({ id, title, placeholder, name }) {
           name={name}
           rows="3"
           cols="33"
+          value={editExp}
+          onChange={onChange}
+          id={"text_" + id}
         />
       </label>
     </div>
   );
 }
 
-function ExperienceCard({ experienceList }) {
+function ExperienceCard({
+  experienceList,
+  handleExpEditClick,
+  handleExpDelClick,
+}) {
   return (
     <div className="experience-card">
-      <ul>
+      <ul className="exp-list">
         {experienceList.map((experience, index) => (
           <li key={index}>
             <p>{experience.jobTitle}</p>
             <p>{experience.company}</p>
-            <button>Edit</button>
-            <button>Del</button>
+            <button
+              className="edit-exp"
+              onClick={() => {
+                handleExpEditClick(index);
+              }}
+            >
+              Edit
+            </button>
+            <button
+              className="del-exp"
+              onClick={() => {
+                handleExpDelClick(index);
+              }}
+            >
+              Del
+            </button>
           </li>
         ))}
       </ul>

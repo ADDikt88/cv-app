@@ -52,8 +52,8 @@ function CVApp() {
   const [editEduMode, setEditEduMode] = useState(false);
   const [editEduIndex, setEditEduIndex] = useState(null);
   const [editEdu, setEditEdu] = useState({
-    name: "",
-    degree: "",
+    name: null,
+    degree: null,
     entryYear: null,
     gradYear: null,
   });
@@ -135,10 +135,92 @@ function CVApp() {
 
   /******************************* Experience Functions ***********************************/
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [editExpMode, setEditExpMode] = useState(false);
+  const [editExpIndex, setEditExpIndex] = useState(null);
+  const [editExp, setEditExp] = useState({
+    jobTitle: null,
+    company: null,
+    startMonth: null,
+    startYear: null,
+    endMonth: null,
+    endYear: null,
+    current: false,
+    resp1: null,
+    resp2: null,
+    resp3: null,
+  });
 
-  const [inputMonth, setInputMonth] = useState("");
-  const [inputYear, setInputYear] = useState("");
+  const [isChecked, setIsChecked] = useState(editExp.current);
+
+  //const [inputMonth, setInputMonth] = useState("");
+  //const [inputYear, setInputYear] = useState("");
+
+  function handleExpEditClick(index) {
+    console.log(experienceList[index].current);
+    //
+    const editJobTitle = document.querySelector("#editJobTitle");
+    const editCompany = document.querySelector("#editCompany");
+    const editStartMonth = document.querySelector("#editStartMonth");
+    const editStartYear = document.querySelector("#editStartYear");
+
+    const editEndMonth = document.querySelector("#editEndMonth");
+    const editEndYear = document.querySelector("#editEndYear");
+
+    const editCurrent = document.querySelector("#checkbox");
+
+    const editExp1 = document.querySelector("#text_1");
+    const editExp2 = document.querySelector("#text_2");
+    const editExp3 = document.querySelector("#text_3");
+
+    editJobTitle.value = experienceList[index].jobTitle;
+    editCompany.value = experienceList[index].company;
+    editStartMonth.value = experienceList[index].startMonth;
+    editStartYear.value = experienceList[index].startYear;
+    editEndMonth.value = experienceList[index].endMonth;
+    editEndYear.value = experienceList[index].endYear;
+
+    editExp1.value = experienceList[index].responsibility[0];
+    editExp2.value = experienceList[index].responsibility[1];
+    editExp3.value = experienceList[index].responsibility[2];
+
+    if (experienceList[index].current) {
+      editEndMonth.disabled = true;
+      editEndYear.disabled = true;
+      editExp.current = true;
+    } else {
+      editEndMonth.disabled = false;
+      editEndYear.disabled = false;
+      editExp.current = false;
+    }
+
+    setIsChecked(experienceList[index].current);
+    editCurrent.checked = experienceList[index].current;
+
+    const expItems = document.querySelectorAll(".exp-list > li");
+    expItems.forEach((expItem) => (expItem.style.border = "none"));
+    expItems[index].style.border = "1px solid red";
+
+    const expButton = document.querySelector(".exp-submit");
+    expButton.textContent = "Edit Experience";
+
+    const expButtons = document.querySelectorAll(".exp-list > li > button");
+    expButtons.forEach((expBtn) => (expBtn.disabled = true));
+
+    setEditExpIndex(index);
+    setEditExpMode(true);
+  }
+
+  function handleExpDelClick(index) {
+    console.log("exp deleting " + index);
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this experience?"
+    );
+
+    if (confirmed) {
+      const updatedExperience = experienceList.filter((item, i) => i !== index);
+      setExperienceList(updatedExperience);
+    }
+  }
 
   function handleExperienceSubmit(e) {
     console.log("experience added");
@@ -157,39 +239,78 @@ function CVApp() {
 
     const responsibility = [exp1, exp2, exp3];
 
-    setExperienceList([
-      ...experienceList,
-      {
-        jobTitle,
-        company,
-        startMonth,
-        startYear,
-        endMonth,
-        endYear,
-        current,
-        responsibility,
-      },
-    ]);
+    const newExperience = {
+      jobTitle,
+      company,
+      startMonth,
+      startYear,
+      endMonth,
+      endYear,
+      current,
+      responsibility,
+    };
+
+    if (!editExpMode) {
+      console.log("experience added");
+      setExperienceList([...experienceList, newExperience]);
+      const editEndMonth = document.querySelector("#editEndMonth");
+      const editEndYear = document.querySelector("#editEndYear");
+      editEndMonth.disabled = false;
+      editEndYear.disabled = false;
+    } else {
+      console.log("experience editing");
+      const updatedExperience = [...experienceList];
+      updatedExperience[editExpIndex] = newExperience;
+      setExperienceList(updatedExperience);
+
+      const expButton = document.querySelector(".exp-submit");
+      expButton.textContent = "Add Experience";
+
+      const expItems = document.querySelectorAll(".exp-list > li");
+      expItems.forEach((expItem) => (expItem.style.border = "none"));
+
+      const expButtons = document.querySelectorAll(".exp-list > li > button");
+      expButtons.forEach((expBtn) => (expBtn.disabled = false));
+    }
+    setEditExpIndex(null);
+    setEditExpMode(false);
     setIsChecked(false);
-    setInputMonth("");
-    setInputYear("");
+
+    setEditExp({
+      jobTitle: null,
+      company: null,
+      startMonth: null,
+      startYear: null,
+      endMonth: null,
+      endYear: null,
+      current: false,
+      resp1: null,
+      resp2: null,
+      resp3: null,
+    });
     e.target.reset();
   }
 
   function handleCheckbox() {
-    if (!isChecked) {
-      setInputMonth("");
-      setInputYear("");
+    if (!editExp.current) {
+      const editEndMonth = document.querySelector("#editEndMonth");
+      const editEndYear = document.querySelector("#editEndYear");
+      editEndMonth.disabled = true;
+      editEndYear.disabled = true;
+      editExp.current = true;
+    } else {
+      const editEndMonth = document.querySelector("#editEndMonth");
+      const editEndYear = document.querySelector("#editEndYear");
+      editEndMonth.disabled = false;
+      editEndYear.disabled = false;
+      editExp.current = false;
     }
     setIsChecked(!isChecked);
   }
 
-  function handleInputMonth(e) {
-    setInputMonth(e.target.value);
-  }
-
-  function handleInputYear(e) {
-    setInputYear(e.target.value);
+  function handleExpInputChange(e) {
+    console.log(editExp);
+    setEditExp(e.target.value);
   }
 
   /******************************* Skill Functions ***********************************/
@@ -309,11 +430,10 @@ function CVApp() {
           handleSubmit={handleExperienceSubmit}
           experienceList={experienceList}
           handleCheckbox={handleCheckbox}
-          isChecked={isChecked}
-          inputMonth={inputMonth}
-          inputYear={inputYear}
-          handleInputMonth={handleInputMonth}
-          handleInputYear={handleInputYear}
+          editExp={editExp}
+          handleExpEditClick={handleExpEditClick}
+          handleExpDelClick={handleExpDelClick}
+          handleExpInputChange={handleExpInputChange}
         />
         <EditEducation
           handleSubmit={handleEducationSubmit}
