@@ -7,8 +7,11 @@ function DisplayEducation({ educationList }) {
       <ul>
         {educationList.map((education, index) => (
           <li key={index}>
-            <h3>{education.name}</h3>
-            <p>{education.degree}</p>
+            <h4 className="displayEduName">
+              {education.name}
+              {","}
+            </h4>
+            <p className="displayEduDegree">{education.degree}</p>
             <p>
               {education.entryYear} to {education.gradYear}
             </p>

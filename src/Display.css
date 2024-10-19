@@ -23,10 +23,20 @@
   text-align: left;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
-.display-education > ul > li > * {
+.display-education > ul > li > h4 {
   margin: 0;
+}
+
+.display-education > ul > li > p {
+  margin: 0;
+  margin-left: 1rem;
+}
+
+.display-education > ul > li > p:last-child {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 /*** EXPERIENCE ***/

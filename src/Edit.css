@@ -76,6 +76,8 @@
 }
 .education-card > ul > li > * {
   margin: 0;
+  word-wrap: break-word;
+  max-width: 30%;
 }
 
 .edu-submit {
@@ -117,7 +119,8 @@
 .employment-years {
   display: grid;
   width: auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 100px;
+  grid-template-rows: 1fr 1fr;
   gap: 5px;
   padding: 0 9px;
 }
@@ -129,8 +132,8 @@
   text-align: right;
 }
 
-.employment-years > div > label > * {
-  width: 26%;
+.employment-years > div > label > input {
+  width: 50px;
   justify-self: right;
 }
 
@@ -151,6 +154,7 @@
 .experience-dates {
   text-align: right;
 }
+
 .exp-submit {
   border: 1px solid black;
 }
@@ -188,4 +192,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Grouped Styling */
+
+.skill-submit,
+.edu-submit,
+.exp-submit {
+  margin-top: 10px;
+}
+
+.skills-list,
+.exp-list,
+.edu-list {
+  padding: 0 10px;
+}
+
+.skills-list > li,
+.edu-list > li,
+.exp-list > li {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin: 5px auto;
+}
+
+.skills-list > li > p,
+.edu-list > li > p,
+.exp-list > li > p {
+  margin: auto;
 }

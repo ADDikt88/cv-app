@@ -332,7 +332,7 @@ function CVApp() {
       updatedSkills[editSkillIndex] = skill;
       setSkillsList(updatedSkills);
       const skillButton = document.querySelector(".skill-submit");
-      skillButton.textContent = "Add SKill";
+      skillButton.textContent = "Add Skill";
 
       const skillItems = document.querySelectorAll(".skills-list > li");
       skillItems.forEach((skillItem) => (skillItem.style.border = "none"));
@@ -357,7 +357,7 @@ function CVApp() {
     skillItems[index].style.border = "1px solid red";
 
     const skillButton = document.querySelector(".skill-submit");
-    skillButton.textContent = "Edit SKill";
+    skillButton.textContent = "Edit Skill";
 
     const skillButtons = document.querySelectorAll(
       ".skills-list > li > button"

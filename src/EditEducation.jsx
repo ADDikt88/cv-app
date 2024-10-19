@@ -124,9 +124,9 @@ function EducationCard({
           <li key={index}>
             <p>{education.name}</p>
             <p>{education.degree}</p>
-            <p>
+            {/* <p>
               {education.entryYear} to {education.gradYear}
-            </p>
+            </p> */}
             <button
               className="edit-edu"
               onClick={() => {
