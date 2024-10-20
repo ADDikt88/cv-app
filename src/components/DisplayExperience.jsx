@@ -1,5 +1,3 @@
-//import "./Display.css";
-
 function DisplayExperience({ experienceList }) {
   const sortedExperience = experienceList.sort((a, b) => {
     if (a.current) return -1;

@@ -1,16 +1,18 @@
-import EditInfo from "./EditInfo.jsx";
-import DisplayInfo from "./DisplayInfo.jsx";
-import EditEducation from "./EditEducation.jsx";
-import DisplayEducation from "./DisplayEducation.jsx";
-import EditSkills from "./EditSkills.jsx";
-import DisplaySkills from "./DisplaySkills.jsx";
-import EditExperience from "./EditExperience.jsx";
-import DisplayExperience from "./DisplayExperience.jsx";
+import EditInfo from "./components/EditInfo.jsx";
+import DisplayInfo from "./components/DisplayInfo.jsx";
+import EditEducation from "./components/EditEducation.jsx";
+import DisplayEducation from "./components/DisplayEducation.jsx";
+import EditSkills from "./components/EditSkills.jsx";
+import DisplaySkills from "./components/DisplaySkills.jsx";
+import EditExperience from "./components/EditExperience.jsx";
+import DisplayExperience from "./components/DisplayExperience.jsx";
 
 import { useState } from "react";
 
-import "./CVApp.css";
-import FeatureButtons from "./FeatureButtons.jsx";
+import "./styles/CVApp.css";
+import "./styles/Display.css";
+import "./styles/Edit.css";
+import FeatureButtons from "./components/FeatureButtons.jsx";
 
 function CVApp() {
   /******************************* Initializing Content ***********************************/

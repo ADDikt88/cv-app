@@ -1,5 +1,3 @@
-//import "./Display.css";
-
 function DisplayEducation({ educationList }) {
   const sortedEducation = educationList.sort((a, b) => {
     return b.gradYear - a.gradYear;

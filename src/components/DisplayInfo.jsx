@@ -1,5 +1,3 @@
-import "./Display.css";
-
 function DisplayInfo({ user }) {
   return (
     <div className="display-info">

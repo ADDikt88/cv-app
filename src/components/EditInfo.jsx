@@ -1,4 +1,3 @@
-import "./Edit.css";
 import CollapsibleButton from "./CollapsibleButton";
 
 function EditInfo({
