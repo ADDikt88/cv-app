@@ -21,14 +21,18 @@ function CVApp() {
     description: "lorem ipsum",
   });
 
-  const [skillsList, setSkillsList] = useState(["React", "HTML", "CSS"]);
+  const [skillsList, setSkillsList] = useState([
+    "Skill 1",
+    "Skill 2",
+    "Skill 3",
+  ]);
 
   const [educationList, setEducationList] = useState([
     {
-      name: "University of Toronto",
-      degree: "Engineering Science",
-      entryYear: 2023,
-      gradYear: 2025,
+      name: "Education Institution",
+      degree: "Name of Degree",
+      entryYear: 2020,
+      gradYear: 2024,
     },
   ]);
 
@@ -38,13 +42,13 @@ function CVApp() {
       company: "Pear Inc.",
       startMonth: 1,
       startYear: 2015,
-      endMonth: 1,
-      endYear: 2025,
+      endMonth: 12,
+      endYear: 2020,
       current: false,
       responsibility: [
-        "Developed entire user interface",
-        "Created the first jPhone",
-        "Added a scroll wheel to the jMouse",
+        "Short description of your role...",
+        "Short description of your role...",
+        "Short description of your role...",
       ],
     },
   ]);
@@ -518,11 +522,12 @@ function CVApp() {
   return (
     <>
       <div className="left-box">
-        {/* <div className="feature-buttons">
-          <button>Reset</button>
-          <button>Load Example</button>
-          <button>Download PDF</button>
-        </div> */}
+        <h2>
+          {"ADDikt8's CV Maker: "}
+          <a href="https://github.com/ADDikt88/" target="_blank">
+            github/ADDikt88
+          </a>
+        </h2>
         <FeatureButtons
           handleResetClick={handleResetClick}
           handleExampleClick={handleExampleClick}
