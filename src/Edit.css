@@ -75,7 +75,7 @@
   align-items: center;
 }
 .education-card > ul > li > * {
-  margin: 0;
+  margin-left: 0;
   word-wrap: break-word;
   max-width: 30%;
 }
@@ -217,8 +217,13 @@
   margin: 5px auto;
 }
 
-.skills-list > li > p,
 .edu-list > li > p,
 .exp-list > li > p {
+  margin: 0 auto 0 0;
+  text-align: left;
+}
+
+.skills-list > li > p {
   margin: auto;
+  text-align: left;
 }

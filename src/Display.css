@@ -31,7 +31,7 @@
 
 .display-education > ul > li > p {
   margin: 0;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
 }
 
 .display-education > ul > li > p:last-child {
@@ -55,6 +55,7 @@
   display: grid;
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 1fr 1fr;
+  margin-bottom: 10px;
 }
 
 .display-experience > ul > li > ul {

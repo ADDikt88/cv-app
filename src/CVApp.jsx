@@ -6,16 +6,18 @@ import EditSkills from "./EditSkills.jsx";
 import DisplaySkills from "./DisplaySkills.jsx";
 import EditExperience from "./EditExperience.jsx";
 import DisplayExperience from "./DisplayExperience.jsx";
+
 import { useState } from "react";
 
 import "./CVApp.css";
+import FeatureButtons from "./FeatureButtons.jsx";
 
 function CVApp() {
   /******************************* Initializing Content ***********************************/
   const [user, setUser] = useState({
-    name: "Kyle Tsang",
-    email: "fake@fake.aol",
-    phone: "123456789",
+    name: "ADDikt8",
+    email: "addikt@odinproject.com",
+    phone: "3141592653",
     description: "lorem ipsum",
   });
 
@@ -406,11 +408,126 @@ function CVApp() {
     setUser(updateDesc);
   }
 
+  /****************************** Reset CV *******************************/
+  function handleResetClick() {
+    setSkillsList([]);
+    setEducationList([]);
+    setExperienceList([]);
+    setUser({
+      name: "[full name]",
+      email: "[email address]",
+      phone: "[phone number]",
+      description: "{a brief description about yourself...}",
+    });
+  }
+
+  function handleExampleClick() {
+    setUser({
+      name: "ADDikt8",
+      email: "addikt@odinproject.com",
+      phone: "3141592653",
+      description: "lorem ipsum",
+    });
+    setSkillsList([
+      "React",
+      "Javascript",
+      "HTML",
+      "CSS",
+      "Python",
+      "R",
+      "SQL",
+      "Node.js",
+      "Statistical Analysis",
+      "Product Management",
+    ]);
+    setEducationList([
+      {
+        name: "Univeristy of Odin Project",
+        degree: "Full Stack Developer Certificate",
+        entryYear: 2024,
+        gradYear: 2025,
+      },
+      {
+        name: "Massachusetts Institute of Technology",
+        degree: "Masters in Aerospace Engineering",
+        entryYear: 2020,
+        gradYear: 2022,
+      },
+      {
+        name: "Stanford University",
+        degree: "Bachelors in Computer Science",
+        entryYear: 2009,
+        gradYear: 2013,
+      },
+    ]);
+    setExperienceList([
+      {
+        jobTitle: "Senior Software Engineer",
+        company: "Pear Inc.",
+        startMonth: 1,
+        startYear: 2015,
+        endMonth: 12,
+        endYear: 2020,
+        current: false,
+        responsibility: [
+          "Lead the design and development of scalable applications for Pear's flagship products, \
+          ensuring cross-platform compatibility and seamless integration with Pear's ecosystem.",
+          "Architect complex systems using microservices, enhancing performance, and maintaining \
+          high availability for millions of global users",
+          "Mentor junior engineers through code reviews, pair programming, and technical presentations,\
+           fostering a culture of continuous learning",
+        ],
+      },
+      {
+        jobTitle: "Software Developer II",
+        company: "Odinbook & Co.",
+        startMonth: 7,
+        startYear: 2013,
+        endMonth: 10,
+        endYear: 2015,
+        current: false,
+        responsibility: [
+          "Develop and maintain features for OdinBook's social networking platform, \
+          focusing on scalability and user experience for billions of interactions per day",
+          "Implement real-time features like chat, notifications, and activity streams, \
+          optimizing for performance and minimal latency",
+          "Collaborate with front-end developers to ensure smooth and responsive interfaces \
+          that engage users across mobile and web platforms",
+        ],
+      },
+      {
+        jobTitle: "Junior Software Developer",
+        company: "Snowy Super Startup",
+        startMonth: 4,
+        startYear: 2011,
+        endMonth: 9,
+        endYear: 2012,
+        current: false,
+        responsibility: [
+          "Assisted in the development of the Snowy app, an interactive platform designed \
+          for dog owners to monitor, train, and entertain their pets through smart devices",
+          "Contributed to the creation of an intuitive and engaging user interface, \
+          incorporating feedback from pet owners and testers to improve app usability",
+          "Walked the CEO twice daily during scheduled breaks to ensure a healthy living style \
+           while providing a variety of treats to encourage good girl beahviour.",
+        ],
+      },
+    ]);
+  }
   /******************************* Return CV App ***********************************/
   return (
     <>
       <div className="left-box">
-        <p>Open a section below to edit your CV</p>
+        {/* <div className="feature-buttons">
+          <button>Reset</button>
+          <button>Load Example</button>
+          <button>Download PDF</button>
+        </div> */}
+        <FeatureButtons
+          handleResetClick={handleResetClick}
+          handleExampleClick={handleExampleClick}
+        ></FeatureButtons>
+        <h3>Open a section below to edit your CV</h3>
         <EditInfo
           user={user.name}
           handleNameChange={handleNameChange}
@@ -445,11 +562,13 @@ function CVApp() {
         />
       </div>
       <div className="right-box">
-        <p>See your CV template update below</p>
-        <DisplayInfo user={user} />
-        <DisplaySkills skillsList={skillsList} />
-        <DisplayExperience experienceList={experienceList} />
-        <DisplayEducation educationList={educationList} />
+        <h3>See your CV template update below</h3>
+        <div className="cv-template">
+          <DisplayInfo user={user} />
+          <DisplaySkills skillsList={skillsList} />
+          <DisplayExperience experienceList={experienceList} />
+          <DisplayEducation educationList={educationList} />
+        </div>
       </div>
     </>
   );
